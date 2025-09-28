@@ -53,7 +53,9 @@
     "3d-force-graph-vr": "^3.1",
     "force-graph": "^1.51",
     "prop-types": "15",
-    "react-kapsule": "^2.5"
+    "react-dom": "^19.1.1",
+    "react-kapsule": "^2.5",
+    "three": "^0.180.0"
   },
   "peerDependencies": {
     "react": "*"

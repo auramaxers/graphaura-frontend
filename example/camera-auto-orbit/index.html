@@ -16,40 +16,66 @@
   <script src="//cdn.jsdelivr.net/npm/@babel/standalone"></script>
   <script type="text/jsx" data-type="module">
     import ForceGraph3D from 'https://esm.sh/react-force-graph-3d?external=react';
-    import React, { useEffect, useRef } from 'react';
+    import React, {useCallback, useEffect, useRef} from 'react';
     import { createRoot } from 'react-dom';
     import { genRandomTree } from '../datasets/random-data.js';
+    import { UnrealBloomPass } from 'https://esm.sh/three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-    const data = genRandomTree();
-    const distance = 1400;
+    fetch('../datasets/people_events_locations.json').then(res => res.json()).then(data => {
+        const distance = 1400;
 
-    const CameraOrbit = () => {
-      const fgRef = useRef();
+        const CameraOrbit = () => {
+            const fgRef = useRef();
 
-      useEffect(() => {
-        fgRef.current.cameraPosition({ z: distance });
 
-        // camera orbit
-        let angle = 0;
-        setInterval(() => {
-          fgRef.current.cameraPosition({
-            x: distance * Math.sin(angle),
-            z: distance * Math.cos(angle)
-          });
-          angle += Math.PI / 300;
-        }, 10);
-      }, []);
+            useEffect(() => {
+                const bloomPass = new UnrealBloomPass();
+                bloomPass.strength = 4;
+                bloomPass.radius = 1;
+                bloomPass.threshold = 0;
+                fgRef.current.postProcessingComposer().addPass(bloomPass);
 
-      return <ForceGraph3D
-        ref={fgRef}
-        graphData={data}
-        enableNodeDrag={false}
-        enableNavigationControls={false}
-        showNavInfo={false}
-      />;
-    };
+                // camera orbit
+                let angle = 0;
+                setInterval(() => {
+                    fgRef.current.cameraPosition({
+                        x: distance * Math.sin(angle),
+                        z: distance * Math.cos(angle)
+                    });
+                    angle += Math.PI / 300;
+                }, 10);
+            }, []);
 
-    createRoot(document.getElementById('graph'))
-      .render(<CameraOrbit />);
+
+
+            // const handleClick = useCallback(node => {
+            //     // Aim at node from outside it
+            //     const distance = 90;
+            //     const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+            //
+            //     fgRef.current.cameraPosition(
+            //         { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+            //         node, // lookAt ({ x, y, z })
+            //         3000  // ms transition duration
+            //     );
+            // }, [fgRef]);
+
+            return <ForceGraph3D
+                ref={fgRef}
+                backgroundColor="#000003"
+                graphData={data}
+                nodeLabel="id"
+                nodeAutoColorBy="group"
+                nodeVal="size"
+                enableNodeDrag={false}
+                enableNavigationControls={false}
+                showNavInfo={false}
+            />;
+        };
+
+
+        createRoot(document.getElementById('graph'))
+            .render(<CameraOrbit/>);
+    });
   </script>
 </body>
