@@ -1,0 +1,37 @@
+{
+    "nodes": [
+        {"id": "A", "group": 0, "size": "6"},
+        {"id": "B", "group": 1, "size": "6"},
+        {"id": "C", "group": 2, "size": "6"},
+        {"id": "D", "group": 3, "size": "6"},
+        {"id": "E", "group": 4, "size": "6"},
+        {"id": "F", "group": 5, "size": "6"},
+        {"id": "G", "group": 6, "size": "6"},
+        {"id": "H", "group": 7, "size": "6"},
+        {"id": "I", "group": 8, "size": "6"},
+        {"id": "J", "group": 9, "size": "6"},
+        {"id": "K", "group": 10, "size": "6"},
+        {"id": "L", "group": 11, "size": "6"},
+        {"id": "M", "group": 12, "size": "6"},
+        {"id": "N", "group": 13, "size": "6"},
+        {"id": "O", "group": 14, "size": "6"}
+
+    ],
+    "links": [
+
+        {"source": "A", "target": "B", "value": 1, "distance": 500, "strength": 1},
+        {"source": "B", "target": "C", "value": 1, "distance": 500},
+        {"source": "C", "target": "D", "value": 1, "distance": 500},
+        {"source": "D", "target": "E", "value": 1, "distance": 500},
+        {"source": "E", "target": "F", "value": 1, "distance": 500},
+        {"source": "F", "target": "G", "value": 1, "distance": 500},
+        {"source": "G", "target": "H", "value": 1, "distance": 500},
+        {"source": "H", "target": "I", "value": 1, "distance": 500},
+        {"source": "I", "target": "J", "value": 1, "distance": 500},
+        {"source": "J", "target": "K", "value": 1, "distance": 500},
+        {"source": "K", "target": "L", "value": 1, "distance": 500},
+        {"source": "L", "target": "M", "value": 1, "distance": 500},
+        {"source": "M", "target": "N", "value": 1, "distance": 500},
+        {"source": "N", "target": "O", "value": 1, "distance": 1}
+    ]
+}
